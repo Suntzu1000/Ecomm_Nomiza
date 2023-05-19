@@ -1,0 +1,53 @@
+import { Product } from "./types/Product";
+
+export const sampleProducts: Product[] = [
+  {
+    name: "Camiseta Nike Slim",
+    slug: "camiseta-nike-slim",
+    category: "Camisetas",
+    image: "../images/p1.png",
+    price: 120,
+    countInStock: 10,
+    brand: "Nike",
+    rating: 4.5,
+    numReviews: 10,
+    description: 'camiseta de alta qualidade',
+  },
+  {
+    name: "Camiseta Nike Slim",
+    slug: "camiseta-nike-slim",
+    category: "Camisetas",
+    image: "../images/p2.png",
+    price: 120,
+    countInStock: 10,
+    brand: "Nike",
+    rating: 4.5,
+    numReviews: 10,
+    description: 'camiseta de alta qualidade',
+  },
+  {
+    name: "Camiseta Nike Slim",
+    slug: "camiseta-nike-slim",
+    category: "Camisetas",
+    image: "../images/p3.png",
+    price: 120,
+    countInStock: 10,
+    brand: "Nike",
+    rating: 4.5,
+    numReviews: 10,
+    description: 'camiseta de alta qualidade',
+  },
+  {
+    name: "Camiseta Nike Slim",
+    slug: "camiseta-nike-slim",
+    category: "Camisetas",
+    image: "../images/p4.png",
+    price: 120,
+    countInStock: 10,
+    brand: "Nike",
+    rating: 4.5,
+    numReviews: 10,
+    description: 'camiseta de alta qualidade',
+  },
+  
+];
