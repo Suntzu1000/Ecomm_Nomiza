@@ -18,7 +18,7 @@ export const sampleProducts: Product[] = [
   },
   {
     name: "Camiseta Nike Slim",
-    slug: "camiseta-nike-slim",
+    slug: "camiseta-nik-slim",
     category: "Camisetas",
     image: p2,
     price: 120,
@@ -30,7 +30,7 @@ export const sampleProducts: Product[] = [
   },
   {
     name: "Camiseta Nike Slim",
-    slug: "camiseta-nike-slim",
+    slug: "camiseta-nke-slim",
     category: "Camisetas",
     image: p3,
     price: 120,
@@ -42,7 +42,7 @@ export const sampleProducts: Product[] = [
   },
   {
     name: "Camiseta Nike Slim",
-    slug: "camiseta-nike-slim",
+    slug: "camista-nike-slim",
     category: "Camisetas",
     image: p4,
     price: 120,

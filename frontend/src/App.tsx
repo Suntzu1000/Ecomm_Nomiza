@@ -1,5 +1,6 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import { sampleProducts } from "./data";
+import Container from "./components/Container";
 import Navbar from "./pages/Navbar";
 
 function App() {
@@ -10,26 +11,14 @@ function App() {
           <Navbar />
         </header>
       </div>
-      <main className="flex" >
-        <ul>
-          {sampleProducts.map((product) => (
-            <li key={product.slug}>
-              <img
-                src={product.image}
-                alt={product.name}
-                className="product-image"
-              />
-              <h2>{product.name}</h2>
-              <p>R${product.price}</p>
-            </li>
-          ))}
-        </ul>
+      <main>
+        <Container className="flex mt-10">
+          <Outlet />
+        </Container>
       </main>
 
       <footer>
-        <div className="text-center" >
-          Todos os direitos reservados
-        </div>
+        <div className="text-center">Todos os direitos reservados</div>
       </footer>
     </>
   );
