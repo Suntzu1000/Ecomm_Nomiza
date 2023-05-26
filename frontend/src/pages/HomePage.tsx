@@ -1,6 +1,5 @@
 import { useEffect, useReducer } from "react";
 import Row from "../components/Row";
-import { sampleProducts } from "../data";
 import Col from "../components/Col";
 import { Link } from "react-router-dom";
 import { Product } from "../types/Product";
@@ -66,10 +65,9 @@ export default function HomePage() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-  
     <>
       <Row className="grid lg:grid-cols-4 md:grid-cols-2">
-        {sampleProducts.map((product) => (
+        {products.map((product) => (
           <Col key={product.slug}>
             <Link to={`/product/` + product.slug}>
               <img
