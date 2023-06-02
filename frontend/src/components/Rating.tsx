@@ -1,7 +1,7 @@
 function Rating(props: {
   rating: number;
   numReviews?: number;
-  caption: string;
+  caption?: string;
 }) {
     const {rating, numReviews, caption} = props
     return <div className="rating" >
