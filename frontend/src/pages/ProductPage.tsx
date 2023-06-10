@@ -12,6 +12,9 @@ import ListGroupItem from "../components/ListGroups/ListGroupItem";
 import Rating from "../components/Rating";
 import Card from "../components/CardProps/Card";
 import CardBody from "../components/CardProps/CardBody";
+import Badge from "../components/Badge";
+import { BadgeSize, BadgeVariant } from "../types/badge";
+import Button from "../components/Button";
 
 export default function ProductPage() {
   const params = useParams();
@@ -37,7 +40,7 @@ export default function ProductPage() {
       <Row className="grid grid-cols-3">
         <Col md={6} className="flex-grow-1">
           <img
-            className="w-[90%] h-auto mb-4"
+            className="w-[100%] h-auto mb-4"
             src={product.image}
             alt={product.name}
           />
@@ -71,12 +74,33 @@ export default function ProductPage() {
           <Card>
             <CardBody>
               <ListGroup variant="flush">
-                <ListGroupItem >
-                  <Row className="" >
-                    <Col>Preço:</Col>
-                    <Col>${product.price}</Col>
+                <ListGroupItem>
+                  <Row className="flex item-center space-x-44">
+                    <h3 className="text-xl  font-bold" >Preço:</h3>
+                    <p className="font-semibold" >R${product.price}</p>
                   </Row>
                 </ListGroupItem>
+                <ListGroupItem >
+                  <Row className="grid grid-cols-2 space-x-10 ">
+                    <Col className=" font-bold" >Status:</Col>
+                    <Col >
+                      {product.countInStock > 0 ? (
+                        <Badge variant={BadgeVariant.SUCCESS} size={BadgeSize.SMALL}>Em Estoque</Badge>
+                      ) : (
+                        <Badge variant={BadgeVariant.ERROR} size={BadgeSize.SMALL}>Indisponível</Badge>
+                      )}
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+                {product.countInStock > 0 && (
+                  <ListGroupItem>
+                    <div className="d-grid">
+                      <Button variant="primary">
+                        Carrinho
+                      </Button>
+                    </div>
+                  </ListGroupItem>
+                )}
               </ListGroup>
             </CardBody>
           </Card>
