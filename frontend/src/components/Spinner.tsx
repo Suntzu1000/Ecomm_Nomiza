@@ -1,19 +1,17 @@
-import React from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
 
-interface SpinnerProps {
+interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
   animation?: "border" | "grow";
-  role?: string;
   size?: "sm" | "md" | "lg";
-  className?: string;
-  children?: React.ReactNode; // Definir o tipo da propriedade children
+  children?: ReactNode;
 }
 
 const Spinner: React.FC<SpinnerProps> = ({
   animation = "border",
-  role = "status",
   size = "md",
   className = "",
   children,
+  ...rest
 }) => {
   const sizes = {
     sm: "h-4 w-4 border-2",
@@ -23,13 +21,14 @@ const Spinner: React.FC<SpinnerProps> = ({
 
   const animations = {
     border: "border-gray-300 border-t-4 animate-spin",
-    grow: "border-gray-300 rounded-full p-2 animate-pulse",
+    grow: "border-gray-300 rounded-full p-12 text-center animate-pulse",
   };
 
   return (
     <div
       className={`${sizes[size]} ${animations[animation]} ${className}`}
-      role={role}
+      role="status"
+      {...rest}
     >
       {children}
     </div>
@@ -37,3 +36,4 @@ const Spinner: React.FC<SpinnerProps> = ({
 };
 
 export default Spinner;
+

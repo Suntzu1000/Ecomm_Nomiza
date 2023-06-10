@@ -2,9 +2,10 @@ function Rating(props: {
   rating: number;
   numReviews?: number;
   caption?: string;
+  className?: string;
 }) {
-    const {rating, numReviews, caption} = props
-    return <div className="rating" >
+    const {rating, numReviews, caption, className} = props
+    return <div className={`rating ${className}`} >
         <span>
             <i 
                 className={
