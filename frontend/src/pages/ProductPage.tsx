@@ -75,28 +75,38 @@ export default function ProductPage() {
             <CardBody>
               <ListGroup variant="flush">
                 <ListGroupItem>
-                  <Row className="flex item-center space-x-44">
-                    <h3 className="text-xl  font-bold" >Preço:</h3>
-                    <p className="font-semibold" >R${product.price}</p>
+                  <Row className="flex justify-between items-center space-x-4">
+                    <h3 className="text-xl  font-bold">Preço:</h3>
+                    <p className="font-semibold">R${product.price}</p>
                   </Row>
                 </ListGroupItem>
-                <ListGroupItem >
-                  <Row className="grid grid-cols-2 space-x-10 ">
-                    <Col className=" font-bold" >Status:</Col>
-                    <Col >
+                <ListGroupItem>
+                  <Row className="flex justify-between items-center space-x-4">
+                    <h1 className="text-xl font-bold">Status:</h1>
+                    <p>
                       {product.countInStock > 0 ? (
-                        <Badge variant={BadgeVariant.SUCCESS} size={BadgeSize.SMALL}>Em Estoque</Badge>
+                        <Badge
+                          variant={BadgeVariant.SUCCESS}
+                          size={BadgeSize.SMALL}
+                        >
+                          Em Estoque
+                        </Badge>
                       ) : (
-                        <Badge variant={BadgeVariant.ERROR} size={BadgeSize.SMALL}>Indisponível</Badge>
+                        <Badge
+                          variant={BadgeVariant.ERROR}
+                          size={BadgeSize.SMALL}
+                        >
+                          Indisponível
+                        </Badge>
                       )}
-                    </Col>
+                    </p>
                   </Row>
                 </ListGroupItem>
                 {product.countInStock > 0 && (
-                  <ListGroupItem>
-                    <div className="d-grid">
-                      <Button variant="primary">
-                        Carrinho
+                  <ListGroupItem className="">
+                    <div className="w-full " >
+                      <Button className="" variant="success">
+                        Adicionar em Carrinho
                       </Button>
                     </div>
                   </ListGroupItem>

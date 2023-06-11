@@ -1,15 +1,21 @@
-import classNames from 'classnames';
-
+import classNames from "classnames";
 
 interface ButtonProps {
-    children: React.ReactNode;
-    variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
-    size?: 'sm' | 'md' | 'lg';
-    disabled?: boolean;
-    onClick?: () => void;
-  }
-  
-
+  children: React.ReactNode;
+  variant?:
+    | "primary"
+    | "secondary"
+    | "success"
+    | "danger"
+    | "warning"
+    | "info"
+    | "light"
+    | "dark";
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
+  onClick?: () => void;
+  className?: string;
+}
 
 const Button = ({
   children,
@@ -17,6 +23,7 @@ const Button = ({
   size = "md",
   disabled = false,
   onClick,
+  className,
 }: ButtonProps) => {
   const classes = classNames(
     "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm",
@@ -47,7 +54,7 @@ const Button = ({
   return (
     <button
       type="button"
-      className={classes}
+      className={` ${classes} ${className}`}
       disabled={disabled}
       onClick={onClick}
     >

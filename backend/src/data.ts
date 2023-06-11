@@ -35,7 +35,8 @@ export const sampleProducts: Product[] = [
     brand: "Nike",
     rating: 4.5,
     numReviews: 10,
-    description: "camiseta de alta qualidade",
+    description:
+      "camiseta de alta qualidade loremf çfoadnfondaçnfdçofnaçdofn daçfdçoafçofjdço afçdof çaoj fdçoaf çofçdoaifjçodaifjçodjafçoijfçoidjaçofidjçofajdçofja faç dofjdaç ofidjçoaf odçfjaçofijdaçosifjçaojfçodj fçoajfçdofjçoafj dçso f afdçsoijfd çosjfçoadjfç oafjçod sfçodj façosdnçnrahgçoe fçoda çgojd açogçoad çojfçoidajfodiafjçaoijfoa jço oag çoajgçoadjgç ",
   },
   {
     name: "Camiseta Nike Slim",
