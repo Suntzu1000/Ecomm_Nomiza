@@ -1,27 +1,23 @@
 import { useContext, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import "./App.css";
 import Container from "./components/Container";
 import Navbar from "./pages/Navbar/Navbar";
 import { Store } from "./Store";
 import NavbarBrand from "./pages/Navbar/NavbarBrand";
+import Nav from "./pages/Navbar/Nav";
 
 function App() {
-  const { state: {mode}, dispatch } = useContext(Store);
-  useEffect(() => {
-    document.body.setAttribute('data-bs-theme', mode)
-  }, [mode])
-  const switchModeHandler = () => {
-    ctxDispatch({ type: 'SWITCH_MODE' })
-  }
+
   return (
     <>
       <div className="d-flex flex-col- vh-100">
-        <header>
-          <Navbar bg="dark" variant="dark" expand="lg">
+        <header >
+          <Navbar  >
             <Container>
               <NavbarBrand href="/" >ECOMM NOMIZA</NavbarBrand>
             </Container>
+           
           </Navbar>
         </header>
       </div>

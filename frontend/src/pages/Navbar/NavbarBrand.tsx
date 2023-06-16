@@ -7,7 +7,7 @@ interface NavbarBrandProps {
 
 const NavbarBrand: React.FC<NavbarBrandProps> = ({ href, children }) => {
   return (
-    <a href={href} className="text-black font-bold">
+    <a href={href} className="text-gray-400 font-bold">
       {children}
     </a>
   );
