@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, BellIcon, XMarkIcon, SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import { Store } from "../../Store";
-import {Sun} from "@heroicons/react"
+
 
 interface NavbarProps {
   children?: React.ReactNode;
@@ -84,7 +84,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                   className="nav-link header-link"
                   onClick={switchModeHandler}
                 >
-                  {mode === 'light' ? 'Light' : 'Dark'}
+                  {mode === 'light' ? <SunIcon className="w-6" /> : <MoonIcon className="w-6" />}
               </Link>
               </Nav>
                 </Menu>
