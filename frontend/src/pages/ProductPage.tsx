@@ -16,7 +16,12 @@ import Badge from "../components/Badge";
 import { BadgeSize, BadgeVariant } from "../types/badge";
 import Button from "../components/Button";
 
+
 export default function ProductPage() {
+
+
+
+
   const params = useParams();
   const { slug } = params;
   const {
@@ -37,7 +42,7 @@ export default function ProductPage() {
     <MessageBox variant="danger">PRODUTO NÃO ENCONTRADO</MessageBox>
   ) : (
     <div>
-      <Row className="grid grid-cols-3">
+      <Row className={`grid grid-cols-3`} >
         <Col md={6} className="flex-grow-1">
           <img
             className="w-[100%] h-auto mb-4"

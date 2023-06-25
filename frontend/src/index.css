@@ -60,7 +60,6 @@ img.thumbnail {
 
 a.header-link,
 .header-link > a {
-  border: 1px rgb(33, 37, 41) solid;
   border-radius: 2px;
   color: white !important;
   font-weight: bold;
@@ -68,7 +67,6 @@ a.header-link,
 
 a.header-link:hover,
 .header-link > a:hover {
-  color: white;
   border: 1px white solid;
 }
 

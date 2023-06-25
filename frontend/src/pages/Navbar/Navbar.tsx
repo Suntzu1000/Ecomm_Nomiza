@@ -1,10 +1,15 @@
 import React, { Fragment, useEffect, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon, SunIcon, MoonIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+  SunIcon,
+  MoonIcon,
+} from "@heroicons/react/24/outline";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import { Store } from "../../Store";
-
 
 interface NavbarProps {
   children?: React.ReactNode;
@@ -15,17 +20,22 @@ function classNames(...classes: string[]) {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ children }) => {
-  const { state: {mode}, dispatch } = useContext(Store);
+  const {
+    state: { mode },
+    dispatch,
+  } = useContext(Store);
   useEffect(() => {
-    document.body.setAttribute('data-bs-theme', mode)
-  }, [mode])
+    document.body.setAttribute("data-bs-theme", mode);
+  }, [mode]);
   const switchModeHandler = () => {
-    dispatch({ type: 'SWITCH_MODE' })
-  }
-
+    dispatch({ type: "SWITCH_MODE" });
+  };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure
+      as="nav"
+      className={`bg-${mode === "light" ? "gray-800" : "white"}`}
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -78,18 +88,30 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
-                <Nav className="w-100 justify-content-end">
-                <Link
-                  to="#"
-                  className="nav-link header-link"
-                  onClick={switchModeHandler}
-                >
-                  {mode === 'light' ? <SunIcon className="w-6" /> : <MoonIcon className="w-6" />}
-              </Link>
-              </Nav>
+                  <Nav className="w-100 justify-content-end">
+                    <Link
+                      to="#"
+                      className="nav-link header-link"
+                      onClick={switchModeHandler}
+                    >
+                      {mode === "light" ? (
+                        <SunIcon
+                          className={`w-8 bg-${
+                            mode === "light" ? "gray-900" : "white"
+                          }`}
+                        />
+                      ) : (
+                        <MoonIcon
+                          className={`w-8 rounded-full bg-${
+                            mode === "light" ? "white" : "gray-800"
+                          }`}
+                        />
+                      )}
+                    </Link>
+                  </Nav>
                 </Menu>
                 <Menu as="div" className="relative ml-3">
-                <div>
+                  <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Abra o menu do usuário</span>
                       <img
