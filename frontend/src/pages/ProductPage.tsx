@@ -46,7 +46,7 @@ export default function ProductPage() {
         <Col md={6} className="flex-grow-1">
           <img
             className="w-[100%] h-auto mb-4"
-            src={product.image}
+            src={product?.image}
             alt={product.name}
           />
         </Col>

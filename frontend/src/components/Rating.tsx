@@ -64,11 +64,10 @@ function Rating(props: {
         {caption ? (
             <span>{caption}</span>
         ) : numReviews != 0 ? (
-            <span>{'' + numReviews + 'reviews'}</span>
+            <span>{` ${numReviews} Avaliações`}</span>
         ) : (
             ''
         ) }
     </div>
 }
-
 export default Rating;
