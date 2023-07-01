@@ -4,10 +4,11 @@ interface BadgeProps {
     children: React.ReactNode;
     variant: BadgeVariant;
     size: BadgeSize;
+    pill?: boolean;
 
   }
   
-  const Badge: React.FC<BadgeProps> = ({ variant, size, children }) => {
+  const Badge: React.FC<BadgeProps> = ({ variant, size, children, pill }) => {
 
     const SIZE_MAPS: Record<BadgeSize, string> = {
         [BadgeSize.SMALL]: 'px-3.5 text-xs',
@@ -23,7 +24,7 @@ interface BadgeProps {
 
     return (
       <span
-        className={`inline-flex items-center px-4.5 rounded-full ${SIZE_MAPS[size]} ${VARIANT_MAPS[variant]}`}
+        className={`inline-flex items-center px-4.5 ${pill ? 'rounded-full' : 'rounded-lg'} ${SIZE_MAPS[size]} ${VARIANT_MAPS[variant]}`}
       >
         {children}
       </span>

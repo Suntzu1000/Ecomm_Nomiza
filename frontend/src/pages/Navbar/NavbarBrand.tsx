@@ -1,21 +1,23 @@
 import React, { useContext } from "react";
 import { Store } from "../../Store";
+import { Link } from "react-router-dom";
 
 interface NavbarBrandProps {
   children?: React.ReactNode;
-  href: string;
+  to: string;
+  className?: string;
 }
 
-const NavbarBrand: React.FC<NavbarBrandProps> = ({ href, children }) => {
+const NavbarBrand: React.FC<NavbarBrandProps> = ({ to, children, className }) => {
   const {
     state: { mode },
   } = useContext(Store);
   return (
-    <a href={href} className={`font-bold text-${
+    <Link to={to} className={`${className} font-bold text-${
     mode === "light" ? "gray-400" : "white"
   }`}>
-      {children}
-    </a>
+      <h1>{children}</h1>
+    </Link>
   );
 };
 

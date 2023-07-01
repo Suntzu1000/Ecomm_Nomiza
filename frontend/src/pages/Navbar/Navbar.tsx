@@ -6,10 +6,15 @@ import {
   XMarkIcon,
   SunIcon,
   MoonIcon,
+  ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import { Store } from "../../Store";
+import NavbarBrand from "./NavbarBrand";
+import NavHeader from "./NavHeader";
+import Badge from "../../components/Badge";
+import { BadgeSize, BadgeVariant } from "../../types/badge";
 
 interface NavbarProps {
   children?: React.ReactNode;
@@ -21,7 +26,7 @@ function classNames(...classes: string[]) {
 
 const Navbar: React.FC<NavbarProps> = ({ children }) => {
   const {
-    state: { mode },
+    state: { mode, cart },
     dispatch,
   } = useContext(Store);
   useEffect(() => {
@@ -66,18 +71,29 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    <div
-                      className={classNames(
-                        "bg-gray-900  text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "rounded-md px-3 py-2 text-sm font-medium"
-                      )}
-                    >
-                      {children}
-                    </div>
+                    <NavHeader>
+                      <NavbarBrand to="/" children="ECOMM NOMIZA" />
+                    </NavHeader>
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <Menu as="div" className="relative ml-3">
+                  <Nav className="w-100  rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <NavbarBrand
+                        to="/cart"
+                        className="flex flex-1"
+                      >
+                        <ShoppingCartIcon className="w-6" />
+                         <span>
+                           {cart.cartItems.length > 0 && (
+                                                   <Badge pill variant={BadgeVariant.ERROR} size={BadgeSize.SMALL}>
+                            {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                                                   </Badge>
+                         
+                      )}</span></NavbarBrand>
+                  </Nav>
+                </Menu>
                 <button
                   type="button"
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -85,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                   <span className="sr-only">Notificações</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-
+               
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <Nav className="w-100 justify-content-end">
@@ -110,6 +126,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                     </Link>
                   </Nav>
                 </Menu>
+
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">

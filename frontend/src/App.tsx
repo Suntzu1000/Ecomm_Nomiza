@@ -1,9 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./App.css";
 import Container from "./components/Container";
 import Navbar from "./pages/Navbar/Navbar";
 import NavbarBrand from "./pages/Navbar/NavbarBrand";
-import Nav from "./pages/Navbar/Nav";
 import { Store } from "./Store";
 import { useContext } from "react";
 
@@ -22,7 +21,10 @@ function App() {
             <Navbar  >
               <Container>
                 <NavbarBrand href="/" >ECOMM NOMIZA</NavbarBrand>
-              </Container>     
+              </Container> 
+              <Container>
+                <NavbarBrand href="/" >ECOMM NOMIZA</NavbarBrand>
+              </Container>
             </Navbar>
           </header>
         </div>

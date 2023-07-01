@@ -7,8 +7,30 @@ import CardBody from "./CardProps/CardBody";
 import CardTitle from "./CardProps/CardTitle";
 import CardText from "./CardProps/CardText";
 import Button from "./Button";
+import { useContext } from "react";
+import { Store } from "../Store";
+import { CartItem } from "../types/Crt";
+import { convertProductToCartItem } from "../utils";
 
 function ProductItem({ product }: { product: Product }) {
+  const { state, dispatch } = useContext(Store);
+  const {
+    cart: { cartItems },
+  } = state;
+
+  const addToCartHandler = async (item: CartItem) => {
+    const existItem = cartItems.find((x) => x._id === product._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    if (product.countInStock < quantity) {
+      alert("Sorry. Product is out of stock");
+      return;
+    }
+    dispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...item, quantity },
+    });
+    alert("Product added to the cart");
+  };
   return (
     <>
       <Card>
@@ -30,7 +52,13 @@ function ProductItem({ product }: { product: Product }) {
               Fora de Estoque
             </Button>
           ) : (
-            <Button>Add em Carrinho</Button>
+            <Button
+              onClick={() =>
+                addToCartHandler(convertProductToCartItem(product))
+              }
+            >
+              Add em Carrinho
+            </Button>
           )}
         </CardBody>
       </Card>
