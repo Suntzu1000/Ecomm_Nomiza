@@ -15,6 +15,7 @@ interface ButtonProps {
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
+  type?: "button" | "submit" | "reset";
 }
 
 const Button = ({
@@ -24,6 +25,7 @@ const Button = ({
   disabled = false,
   onClick,
   className,
+  type = "button",
 }: ButtonProps) => {
   const classes = classNames(
     "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm",
@@ -53,7 +55,7 @@ const Button = ({
 
   return (
     <button
-      type="button"
+      type={type}
       className={` ${classes} ${className}`}
       disabled={disabled}
       onClick={onClick}

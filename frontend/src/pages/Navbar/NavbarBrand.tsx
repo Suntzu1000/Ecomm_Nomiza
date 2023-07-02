@@ -16,7 +16,7 @@ const NavbarBrand: React.FC<NavbarBrandProps> = ({ to, children, className }) =>
     <Link to={to} className={`${className} font-bold text-${
     mode === "light" ? "gray-400" : "white"
   }`}>
-      <h1>{children}</h1>
+      {children}
     </Link>
   );
 };

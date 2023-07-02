@@ -77,23 +77,24 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                   </div>
                 </div>
               </div>
+              <Menu as="div" className="relative">
+                <Nav className="w-100  rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <NavbarBrand to="/cart" className="relative">
+                      <ShoppingCartIcon className="w-6" />
+                      {cart.cartItems.length > 0 && (
+                        <Badge
+                          pill
+                          variant={BadgeVariant.ERROR}
+                          size={BadgeSize.SMALL}
+                          className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2"
+                        >
+                          {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                        </Badge>
+                      )}
+                  </NavbarBrand>
+                </Nav>
+              </Menu>{" "}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <Menu as="div" className="relative ml-3">
-                  <Nav className="w-100  rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <NavbarBrand
-                        to="/cart"
-                        className="flex flex-1"
-                      >
-                        <ShoppingCartIcon className="w-6" />
-                         <span>
-                           {cart.cartItems.length > 0 && (
-                                                   <Badge pill variant={BadgeVariant.ERROR} size={BadgeSize.SMALL}>
-                            {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                                                   </Badge>
-                         
-                      )}</span></NavbarBrand>
-                  </Nav>
-                </Menu>
                 <button
                   type="button"
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -101,7 +102,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                   <span className="sr-only">Notificações</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-               
+
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <Nav className="w-100 justify-content-end">

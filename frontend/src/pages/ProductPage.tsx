@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductDetailsBySlugQuery } from "../hooks/productHooks";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { getError } from "../utils";
+import { convertProductToCartItem, getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import Row from "../components/Row";
 import Col from "../components/Col";
@@ -15,13 +15,12 @@ import CardBody from "../components/CardProps/CardBody";
 import Badge from "../components/Badge";
 import { BadgeSize, BadgeVariant } from "../types/badge";
 import Button from "../components/Button";
-
+import { useContext } from "react";
+import { Store } from "../Store";
+import { toast } from "react-toastify";
 
 export default function ProductPage() {
-
-
-
-
+  const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
   const {
@@ -29,6 +28,23 @@ export default function ProductPage() {
     isLoading,
     error,
   } = useGetProductDetailsBySlugQuery(slug!);
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x._id === product!._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    if (product!.countInStock < quantity) {
+      toast.warn("Desculpe. Produto está fora de estoque!");
+      return;
+    }
+    dispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...convertProductToCartItem(product!), quantity },
+    });
+    toast.success("Product added to the cart");
+    navigate("/cart");
+  };
 
   return isLoading ? (
     <div className="flex justify-center items-center min-h-screen min-w-full">
@@ -42,7 +58,7 @@ export default function ProductPage() {
     <MessageBox variant="danger">PRODUTO NÃO ENCONTRADO</MessageBox>
   ) : (
     <div>
-      <Row className={`grid grid-cols-3`} >
+      <Row className={`grid grid-cols-3`}>
         <Col md={6} className="flex-grow-1">
           <img
             className="w-[100%] h-auto mb-4"
@@ -109,8 +125,8 @@ export default function ProductPage() {
                 </ListGroupItem>
                 {product.countInStock > 0 && (
                   <ListGroupItem className="">
-                    <div className="w-full " >
-                      <Button className="" variant="success">
+                    <div className="w-full ">
+                      <Button onClick={addToCartHandler}variant="success">
                         Adicionar em Carrinho
                       </Button>
                     </div>
