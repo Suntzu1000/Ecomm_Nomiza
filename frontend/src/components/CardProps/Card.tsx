@@ -3,16 +3,22 @@ import { Store } from "../../Store";
 
 interface CardProps {
   children: React.ReactNode;
+  className?: string;
+  padding?: string;
 }
 
-const Card: React.FC<CardProps> = ({ children }) => {
+const Card: React.FC<CardProps> = ({
+  children,
+  className,
+  padding = "p-6",
+}) => {
   const {
     state: { mode },
   } = useContext(Store);
 
   return (
     <div
-      className={`rounded-lg shadow p-6 bg-${
+      className={`${className}  rounded-lg shadow ${padding} bg-${
         mode === "light" ? "gray-800" : "white"
       }`}
     >

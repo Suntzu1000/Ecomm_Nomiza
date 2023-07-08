@@ -16,7 +16,7 @@ const ListGroupItem: React.FC<CustomListItemProps> = ({
   } = useContext(Store);
 
   return (
-    <div className={`px-4 py-2 text-${
+    <div className={`px-2 py-2 text-${
       mode === "light" ? "white" : "gray-700"
     }  bg-${
       mode === "light" ? "gray-800" : "white"

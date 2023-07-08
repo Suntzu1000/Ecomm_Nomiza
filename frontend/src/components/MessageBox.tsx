@@ -6,6 +6,7 @@ export default function MessageBox({
 }: {
   variant?: string;
   children: React.ReactNode;
+  className?: string;
 }) {
-  return <Alert variant="info">{children}</Alert>;
+  return <Alert className="leading-relaxed" variant="info">{children}</Alert>;
 }

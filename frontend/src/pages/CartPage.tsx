@@ -12,11 +12,13 @@ import ListGroupItem from "../components/ListGroups/ListGroupItem";
 import Button from "../components/Button";
 import Card from "../components/CardProps/Card";
 import CardBody from "../components/CardProps/CardBody";
+import H1 from "../components/H1";
 
 export default function CartPage() {
   const navigate = useNavigate();
   const {
     state: {
+      mode,
       cart: { cartItems },
     },
     dispatch,
@@ -34,8 +36,12 @@ export default function CartPage() {
   };
 
   const checkoutHandler = () => {
-    navigate('/singin?redirect=/shipping')
-  }
+    navigate("/singin?redirect=/shipping");
+  };
+
+  const removeItemHandler = (item: CartItem) => {
+    dispatch({ type: "CART_REMOVE_ITEM", payload: item });
+  };
 
   return (
     <>
@@ -43,9 +49,9 @@ export default function CartPage() {
         <Helmet>
           <title>Carrinho de Compras</title>
         </Helmet>
-        <h1>Carrinho de Compras</h1>
-        <Row>
-          <Col md={8}  >
+        <H1 className="text-left text-3xl font-bold">Carrinho de Compras</H1>
+        <Row className="grid grid-cols-2">
+          <Col md={8} className=" flex-shrink-0">
             {cartItems.length === 0 ? (
               <MessageBox>
                 Carrinho Vazio! <Link to="/">Ir Para Compras</Link>
@@ -62,35 +68,37 @@ export default function CartPage() {
                           className="img-fluid rounded img-thumbnail w-[10%] "
                         />
                         <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                      
-                      <Col md={3} >
-                        
-                        <Button
-                          onClick={() =>
-                            updateCartHandler(item, item.quantity - 1)
-                          }
-                          variant="light"
-                          disabled={item.quantity === 1}
-                        >
-                          <i className="fas fa-minus-circle"></i>
-                        </Button>{" "}
-                        <span>{item.quantity}</span>{" "}
-                        <Button
-                          variant="light"
-                          onClick={() =>
-                            updateCartHandler(item, item.quantity + 1)
-                          }
-                          disabled={item.quantity === item.countInStock}
-                        >
-                          <i className="fas fa-plus-circle"></i>
-                        </Button>
-                      </Col>
-                      <Col md={3}>R${item.price}</Col>
-                      <Col md={2}>
-                        <Button variant="light">
-                          <i className="fas fa-trash"></i>
-                        </Button>
-                      </Col>
+
+                        <Col className="w-[30%] py-2">
+                          <Button
+                            onClick={() =>
+                              updateCartHandler(item, item.quantity - 1)
+                            }
+                            variant={mode as "dark" | "light"}
+                            disabled={item.quantity === 1}
+                          >
+                            <i className="fas fa-minus-circle"></i>
+                          </Button>{" "}
+                          <span>{item.quantity}</span>{" "}
+                          <Button
+                            variant={mode as "dark" | "light"}
+                            onClick={() =>
+                              updateCartHandler(item, item.quantity + 1)
+                            }
+                            disabled={item.quantity === item.countInStock}
+                          >
+                            <i className="fas fa-plus-circle"></i>
+                          </Button>
+                        </Col>
+                        <Col className="w-[15%]">R${item.price}</Col>
+                        <Col className="w-[15%]">
+                          <Button
+                            onClick={() => removeItemHandler(item)}
+                            variant={mode as "dark" | "light"}
+                          >
+                            <i className="fas fa-trash"></i>
+                          </Button>
+                        </Col>
                       </Col>
                     </Row>
                   </ListGroupItem>
@@ -98,13 +106,13 @@ export default function CartPage() {
               </ListGroup>
             )}
           </Col>
-          <Col md={4}>
-            <Card>
+          <Col md={4} className="flex-grow ">
+            <Card className="p-2">
               <CardBody>
                 <ListGroup variant="flush">
                   <ListGroupItem>
-                    <h3>
-                      Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{" "}
+                    <h3 className="text-2xl">
+                      Total ({cartItems.reduce((a, c) => a + c.quantity, 0)}{" "}
                       items) : R$
                       {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                     </h3>

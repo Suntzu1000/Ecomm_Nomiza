@@ -5,6 +5,7 @@ interface ColProps {
   md?: number;
   lg?: number;
   xl?: number;
+  width?: string; 
   className?: string;
   children?: React.ReactNode; // Definir o tipo da propriedade children
 }
@@ -14,12 +15,13 @@ const Col: React.FC<ColProps> = ({
   md = 12,
   lg = 12,
   xl = 12,
+  width = "w-[100%]",
   className = "",
   children,
 }) => {
   return (
     <div
-      className={`w-full px-4 sm:w-${sm}/12 md:w-${md}/12 lg:w-${lg}/12 xl:w-${xl}/12 ${className}`}
+      className={`${width} px-2 sm:w-${sm}/12 md:w-${md}/12 lg:w-${lg}/12 xl:w-${xl}/12 ${className}`}
     >
       {children}
     </div>

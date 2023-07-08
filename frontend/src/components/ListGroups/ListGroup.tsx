@@ -21,7 +21,7 @@ const ListGroup: React.FC<CustomListGroupProps> = ({
     <div
       className={`text-${
         mode === "light" ? "gray-700" : "white"
-      } rounded-lg shadow-md p-4 bg-${
+      } rounded-lg shadow-md p-2 bg-${
         mode === "light" ? "gray-800" : "white"
       } ${
         variant === "flush" ? "shadow-md" : ""
