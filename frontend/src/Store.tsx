@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { Cart, CartItem } from "./types/Crt";
+import { UserInfo } from "./types/userInfo";
 
 type AppState = {
   mode: string;
-
   cart: Cart;
+  userInfo?: UserInfo;
 };
 
 const initialState: AppState = {
