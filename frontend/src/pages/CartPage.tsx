@@ -36,7 +36,7 @@ export default function CartPage() {
   };
 
   const checkoutHandler = () => {
-    navigate("/singin?redirect=/shipping");
+    navigate("/entrar?redirect=/shipping");
   };
 
   const removeItemHandler = (item: CartItem) => {
