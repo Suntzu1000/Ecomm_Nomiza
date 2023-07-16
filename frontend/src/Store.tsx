@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
-import { Cart, CartItem } from "./types/Crt";
-import { UserInfo } from "./types/UserInfo";
+import { Cart, CartItem, ShippingAddress } from "./types/Crt";
+import { User } from "./types/User";
 
 type AppState = {
   mode: string;
   cart: Cart;
-  userInfo?: UserInfo;
+  user?: User;
 };
 
 const initialState: AppState = {
-  userInfo: localStorage.getItem("userInfo")
+  user: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo")!)
     : null,
 
@@ -39,11 +39,16 @@ type Action =
   | { type: "SWITCH_MODE" }
   | { type: "CART_ADD_ITEM"; payload: CartItem }
   | { type: "CART_REMOVE_ITEM"; payload: CartItem }
-  | { type: "USER_SIGNIN"; payload: UserInfo };
+  | { type: "CART_CLEAR" }
+  | { type: "USER_SIGNIN"; payload: User }
+  | { type: "USER_SIGNOUT" }
+  | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress }
+  | { type: "SAVE_PAYMENT_METHOD"; payload: string };
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case "SWITCH_MODE":
+      localStorage.setItem("mode", state.mode === "dark" ? "light" : "dark");
       return { ...state, mode: state.mode === "dark" ? "light" : "dark" };
     case "CART_ADD_ITEM":
       const newItem = action.payload;
@@ -64,9 +69,51 @@ function reducer(state: AppState, action: Action): AppState {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case "CART_CLEAR":
+      return {...state, cart: {...state.cart, cartItems: []}}
 
-    case "USER_SIGNIN": 
-    return {...state, userInfo: action.payload}
+    case "USER_SIGNIN":
+      return { ...state, user: action.payload };
+
+    case "USER_SIGNOUT":
+      return {
+        mode:
+          window.matchMedia &&
+          window.matchMedia("(prefers-colo-schema: dark)").matches
+            ? "dark"
+            : "light",
+        cart: {
+          cartItems: [],
+          paymentMethod: "PayPal",
+          shippingAddress: {
+            fullName: "",
+            address: "",
+            cep: "",
+            city: "",
+            country: "",
+          },
+          itemsPrice: 0,
+          shippingPrice: 0,
+          taxPrice: 0,
+          totalPrice: 0,
+        },
+      };
+
+    case "SAVE_SHIPPING_ADDRESS":
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: action.payload,
+        },
+      };
+
+    case "SAVE_PAYMENT_METHOD":
+      return {
+        ...state,
+        cart: { ...state.cart, paymentMethod: action.payload },
+      };
+
     default:
       return state;
   }

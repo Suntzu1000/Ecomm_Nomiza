@@ -21,7 +21,7 @@ const Col: React.FC<ColProps> = ({
 }) => {
   return (
     <div
-      className={`${width} px-2 sm:w-${sm}/12 md:w-${md}/12 lg:w-${lg}/12 xl:w-${xl}/12 ${className}`}
+      className={` px-2 sm:w-${sm}/12 md:w-${md}/12 lg:w-${lg}/12 xl:w-${xl}/12 ${className}`}
     >
       {children}
     </div>

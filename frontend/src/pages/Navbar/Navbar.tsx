@@ -26,7 +26,7 @@ function classNames(...classes: string[]) {
 
 const Navbar: React.FC<NavbarProps> = ({ children }) => {
   const {
-    state: { mode, cart },
+    state: { mode, cart, user },
     dispatch,
   } = useContext(Store);
   useEffect(() => {
@@ -35,6 +35,16 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
   const switchModeHandler = () => {
     dispatch({ type: "SWITCH_MODE" });
   };
+
+  const signoutHandler = () => {
+    dispatch({type: "USER_SIGNOUT"})
+    localStorage.removeItem('userInfo')
+    localStorage.removeItem('cartItems')
+    localStorage.removeItem('shippingAddress')
+    localStorage.removeItem('paymentMethod')
+    window.location.href = '/entrar'
+
+  }
 
   return (
     <Disclosure
@@ -80,17 +90,17 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
               <Menu as="div" className="relative">
                 <Nav className="w-100  rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <NavbarBrand to="/cart" className="relative">
-                      <ShoppingCartIcon className="w-6" />
-                      {cart.cartItems.length > 0 && (
-                        <Badge
-                          pill
-                          variant={BadgeVariant.ERROR}
-                          size={BadgeSize.SMALL}
-                          className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2"
-                        >
-                          {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                        </Badge>
-                      )}
+                    <ShoppingCartIcon className="w-6" />
+                    {cart.cartItems.length > 0 && (
+                      <Badge
+                        pill
+                        variant={BadgeVariant.ERROR}
+                        size={BadgeSize.SMALL}
+                        className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2"
+                      >
+                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                      </Badge>
+                    )}
                   </NavbarBrand>
                 </Nav>
               </Menu>{" "}
@@ -149,19 +159,37 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Perfil
-                          </a>
-                        )}
-                      </Menu.Item>
+                      {user ? (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                             to="#signout"
+                             onClick={signoutHandler}
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Sair
+                            </Link>
+                          )}
+                        </Menu.Item>
+                      ) : (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/entrar"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Login
+                            </Link>
+                          )}
+                        </Menu.Item>
+                      )}
+
                       <Menu.Item>
                         {({ active }) => (
                           <a
@@ -172,19 +200,6 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                             )}
                           >
                             Configuraçõoes
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sair
                           </a>
                         )}
                       </Menu.Item>

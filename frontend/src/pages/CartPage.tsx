@@ -7,11 +7,9 @@ import { Helmet } from "react-helmet-async";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import MessageBox from "../components/MessageBox";
-import ListGroup from "../components/ListGroups/ListGroup";
-import ListGroupItem from "../components/ListGroups/ListGroupItem";
+import ListGroup from "../components/ListGroup";
 import Button from "../components/Button";
-import Card from "../components/CardProps/Card";
-import CardBody from "../components/CardProps/CardBody";
+import Card from "../components/Card";
 import H1 from "../components/H1";
 
 export default function CartPage() {
@@ -36,7 +34,7 @@ export default function CartPage() {
   };
 
   const checkoutHandler = () => {
-    navigate("/entrar?redirect=/shipping");
+    navigate("/entrar?redirect=/envio");
   };
 
   const removeItemHandler = (item: CartItem) => {
@@ -59,7 +57,7 @@ export default function CartPage() {
             ) : (
               <ListGroup>
                 {cartItems.map((item: CartItem) => (
-                  <ListGroupItem key={item._id}>
+                  <ListGroup.Item key={item._id}>
                     <Row className="align-items-center">
                       <Col md={4} className="flex items-center">
                         <img
@@ -101,23 +99,23 @@ export default function CartPage() {
                         </Col>
                       </Col>
                     </Row>
-                  </ListGroupItem>
+                  </ListGroup.Item>
                 ))}
               </ListGroup>
             )}
           </Col>
           <Col md={4} className="flex-grow ">
             <Card className="p-2">
-              <CardBody>
+              <Card.Body>
                 <ListGroup variant="flush">
-                  <ListGroupItem>
+                  <ListGroup.Item>
                     <h3 className="text-2xl">
                       Total ({cartItems.reduce((a, c) => a + c.quantity, 0)}{" "}
                       items) : R$
                       {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                     </h3>
-                  </ListGroupItem>
-                  <ListGroupItem>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
                     <div className="d-grid">
                       <Button
                         type="button"
@@ -128,9 +126,9 @@ export default function CartPage() {
                         Fazer Checkout
                       </Button>
                     </div>
-                  </ListGroupItem>
+                  </ListGroup.Item>
                 </ListGroup>
-              </CardBody>
+              </Card.Body>
             </Card>
           </Col>
         </Row>

@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
 import { Product } from "../types/Product";
-import Card from "./CardProps/Card";
+import Card from "./Card";
 import Rating from "./Rating";
-import CardBody from "./CardProps/CardBody";
-import CardTitle from "./CardProps/CardTitle";
-import CardText from "./CardProps/CardText";
 import Button from "./Button";
 import { useContext } from "react";
 import { Store } from "../Store";
@@ -42,12 +39,12 @@ function ProductItem({ product }: { product: Product }) {
             alt={product.name}
           />
         </Link>
-        <CardBody>
+        <Card.Body>
           <Link to={`/product/${product.slug}`}>
-            <CardTitle>{product.name}</CardTitle>
+            <Card.Title>{product.name}</Card.Title>
           </Link>
           <Rating rating={product.rating} numReviews={product.numReviews} />
-          <CardText>${product.price}</CardText>
+          <Card.Text>${product.price}</Card.Text>
           {product.countInStock === 0 ? (
             <Button variant="light" disabled>
               Fora de Estoque
@@ -61,7 +58,7 @@ function ProductItem({ product }: { product: Product }) {
               Add em Carrinho
             </Button>
           )}
-        </CardBody>
+        </Card.Body>
       </Card>
       ;
     </>

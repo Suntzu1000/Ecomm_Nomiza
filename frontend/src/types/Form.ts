@@ -20,3 +20,10 @@ export  interface FormGroupProps {
     className?: string;
     htmlFor?: string;
   }
+
+  export interface FormCheckProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    className?: string;
+    label?: string;
+    id?: string;
+    type?: "checkbox" | "radio";
+  }

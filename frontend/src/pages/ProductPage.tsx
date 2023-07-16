@@ -7,11 +7,9 @@ import { convertProductToCartItem, getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import Row from "../components/Row";
 import Col from "../components/Col";
-import ListGroup from "../components/ListGroups/ListGroup";
-import ListGroupItem from "../components/ListGroups/ListGroupItem";
+import ListGroup from "../components/ListGroup";
 import Rating from "../components/Rating";
-import Card from "../components/CardProps/Card";
-import CardBody from "../components/CardProps/CardBody";
+import Card from "../components/Card";
 import Badge from "../components/Badge";
 import { BadgeSize, BadgeVariant } from "../types/badge";
 import Button from "../components/Button";
@@ -68,40 +66,40 @@ export default function ProductPage() {
         </Col>
         <Col md={3} className="flex-grow-1">
           <ListGroup className="text-left" variant="flush">
-            <ListGroupItem className="font-bold text-2xl">
+            <ListGroup.Item className="font-bold text-2xl">
               <Helmet>
                 <title>{product.name}</title>
               </Helmet>
               <h1>{product.name}</h1>
-            </ListGroupItem>
-            <ListGroupItem>
+            </ListGroup.Item>
+            <ListGroup.Item>
               <Rating
                 className="flex space-x-4"
                 rating={product.rating}
                 numReviews={product.numReviews}
               ></Rating>
-            </ListGroupItem>
-            <ListGroupItem className="flex space-x-1">
+            </ListGroup.Item>
+            <ListGroup.Item className="flex space-x-1">
               <h4 className="font-bold">Preço:</h4>
               <p> R${product.price}</p>
-            </ListGroupItem>
-            <ListGroupItem className="flex space-x-1">
+            </ListGroup.Item>
+            <ListGroup.Item className="flex space-x-1">
               <h4 className="font-bold">Descrição:</h4>
               <p>{product.description}</p>
-            </ListGroupItem>
+            </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
           <Card>
-            <CardBody>
+            <Card.Body>
               <ListGroup variant="flush">
-                <ListGroupItem>
+                <ListGroup.Item>
                   <Row className="flex justify-between items-center space-x-4">
                     <h3 className="text-xl  font-bold">Preço:</h3>
                     <p className="font-semibold">R${product.price}</p>
                   </Row>
-                </ListGroupItem>
-                <ListGroupItem>
+                </ListGroup.Item>
+                <ListGroup.Item>
                   <Row className="flex justify-between items-center space-x-4">
                     <h1 className="text-xl font-bold">Status:</h1>
                     <p>
@@ -122,18 +120,18 @@ export default function ProductPage() {
                       )}
                     </p>
                   </Row>
-                </ListGroupItem>
+                </ListGroup.Item>
                 {product.countInStock > 0 && (
-                  <ListGroupItem className="">
+                  <ListGroup.Item className="">
                     <div className="w-full ">
                       <Button onClick={addToCartHandler}variant="success">
                         Adicionar em Carrinho
                       </Button>
                     </div>
-                  </ListGroupItem>
+                  </ListGroup.Item>
                 )}
               </ListGroup>
-            </CardBody>
+            </Card.Body>
           </Card>
         </Col>
       </Row>
