@@ -11,7 +11,7 @@ const Card: CardComponent = ({ children, className, padding = "p-6" }) => {
 
   return (
     <div
-      className={`${className}  rounded-lg shadow ${padding} bg-${
+      className={`${className} w-[100%] mr-[100%] rounded-xl shadow-2xl ${padding} bg-${
         mode === "light" ? "gray-800" : "white"
       }`}
     >
@@ -21,7 +21,7 @@ const Card: CardComponent = ({ children, className, padding = "p-6" }) => {
 };
 
 Card.Body = function CartBody({ children }: CardBodyProps) {
-  return <div className="text-gray-700">{children}</div>;
+  return <div className="text-gray-700 w-[100%] ">{children}</div>;
 };
 
 Card.Text = function CardText({ children, className, as = 'p', variant = 'primary' }: CardTextProps) {
@@ -51,7 +51,7 @@ Card.Title = function CartTitle({ children }: CardTitleProps) {
 
   return (
     <h2
-      className={`text-lg font-medium mb-2 text-${
+      className={`text-center text-2xl py-2 uppercase font-bold text-${
         mode === "light" ? "white" : "gray-900"
       } `}
     >

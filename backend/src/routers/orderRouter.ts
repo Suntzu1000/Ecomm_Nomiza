@@ -5,6 +5,19 @@ import { OrderModel } from "../models/orderMode";
 import { Product } from "../models/productModel";
 export const orderRouter = express.Router();
 
+orderRouter.get(
+  '/:id',
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    const order = await OrderModel.findById(req.params.id)
+    if (order) {
+      res.send(order)
+    } else {
+      res.status(404).send({ message: 'Pedido não encontrado' })
+    }
+  })
+)
+
 orderRouter.post(
   "/",
   isAuth,
@@ -29,3 +42,27 @@ orderRouter.post(
     }
   })
 );
+
+orderRouter.put(
+  '/:id/pay',
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    const order = await OrderModel.findById(req.params.id).populate('user')
+
+    if (order) {
+      order.isPaid = true
+      order.paidAt = new Date(Date.now())
+      order.paymentResult = {
+        paymentId: req.body.id,
+        status: req.body.status,
+        update_time: req.body.update_time,
+        email_address: req.body.email_address,
+      }
+      const updatedOrder = await order.save()
+
+      res.send({order: updatedOrder, message: "Pedido pago com sucesso"})
+    } else {
+      res.status(404).send({ message: 'Pedido não encontrado' })
+    }
+  })
+)

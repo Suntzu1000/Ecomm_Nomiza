@@ -56,16 +56,16 @@ export default function PlaceOrderPage() {
   }, [cart, navigate]);
 
   return (
-    <div>
-      <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
+    <div className="w-[100%] h-[100%] flex flex-col items-center justify-center">
+      <CheckoutSteps step1 step2 step3 step4/>
       <Helmet>
         <title>Visualizar Pedido </title>
       </Helmet>
       <h1 className="my-3 text-white text-3xl font-semibold">Visualizar Pedido</h1>
-    <Row>
-        <Col md={8}>
-        <Card className="mb-3">
-               <Card.Body>
+    <Row className=" " >
+        <Col md={8} >
+        <Card className="mb-3 text-left">
+               <Card.Body >
                  <Card.Title>Envio</Card.Title>
                  <Card.Text>
                    <strong>Nome:</strong> {cart.shippingAddress.fullName} <br />
@@ -73,28 +73,28 @@ export default function PlaceOrderPage() {
                    {cart.shippingAddress.city}, {cart.shippingAddress.cep},
                    {cart.shippingAddress.country}
                  </Card.Text>
-                 <Link className="text-blue-500 hover:text-blue-700" to="/envio">Editar</Link>
+                 <Link className="text-lg text-red-600 hover:text-red-500 font-bold" to="/envio">Editar</Link>
                </Card.Body>
              </Card>
 
-             <Card className="mb-3">
+             <Card className="mb-3 text-left">
                <Card.Body>
                  <Card.Title>Pagamento</Card.Title>
                  <Card.Text>
                    <strong>Método:</strong> {cart.paymentMethod}
                  </Card.Text>
-                 <Link className="text-blue-500 hover:text-blue-700" to="/pagamento">Editar</Link>
+                 <Link className="text-lg text-red-600 hover:text-red-500 font-bold" to="/pagamento">Editar</Link>
                </Card.Body>
              </Card>
 
-             <Card className="mb-3">
+             <Card className="mb-3 text-left ">
                <Card.Body>
-                 <Card.Title>Items</Card.Title>
-                 <ListGroup variant="flush">
+                 <Card.Title>Itens</Card.Title>
+                 <ListGroup variant="flush"  >
                    {cart.cartItems.map((item) => (
-                     <ListGroup.Item key={item._id}>
-                       <Row className="align-items-center">
-                         <Col md={6}>
+                     <ListGroup.Item key={item._id} className="flex flex-row" >
+                       <Row className=" flex items-center justify-between">
+                         <Col md={6} className="flex items-center space-x-3" >
                            <img
                              src={item.image}
                              alt={item.name}
@@ -105,35 +105,35 @@ export default function PlaceOrderPage() {
                          <Col md={3}>
                            <span>{item.quantity}</span>
                          </Col>
-                         <Col md={3}>${item.price}</Col>
+                         <Col md={3}>R${item.price}</Col>
                        </Row>
                      </ListGroup.Item>
                    ))}
                  </ListGroup>
-                 <Link className=" text-lg bg-red-600 hover:bg-red-300 text-red-300 hover:text-red-600 rounded-md" to="/cart">Editar</Link>
+                 <Link className=" text-lg text-red-600 hover:text-red-500 font-bold" to="/cart">Editar</Link>
                </Card.Body>
              </Card>
         </Col>
-        <Col md={4}>
-          <Card>
-            <Card.Body>
+        <Col md={4}  >
+          <Card className="h-[100%]" >
+            <Card.Body  >
               <Card.Title>Resumo do Pedido</Card.Title>
               <ListGroup variant="flush">
               <ListGroup.Item>
                      <Row>
-                       <Col>Unidade</Col>
+                       <Col>Unidade:</Col>
                        <Col>${cart.itemsPrice.toFixed(2)}</Col>
                      </Row>
                    </ListGroup.Item>
                    <ListGroup.Item>
                      <Row>
-                       <Col>Envio</Col>
+                       <Col>Envio:</Col>
                        <Col>${cart.shippingPrice.toFixed(2)}</Col>
                      </Row>
                    </ListGroup.Item>
                    <ListGroup.Item>
                      <Row>
-                       <Col>Taxa</Col>
+                       <Col>Taxa:</Col>
                        <Col>${cart.taxPrice.toFixed(2)}</Col>
                      </Row>
                    </ListGroup.Item>
@@ -141,7 +141,7 @@ export default function PlaceOrderPage() {
                    <ListGroup.Item>
                      <Row>
                        <Col>
-                         <strong>Total de Pedidos</strong>
+                         <strong className="font-extrabold">Total: </strong>
                        </Col>
                        <Col>
                          <strong>${cart.totalPrice.toFixed(2)}</strong>

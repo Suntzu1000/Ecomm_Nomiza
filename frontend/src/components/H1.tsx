@@ -14,7 +14,7 @@ const H1: React.FC<H1Props> = ({ children, className }) => {
 
   return (
     <>
-      <h1 className={`${className} text-${
+      <h1 className={`my-3 ${className} text-3xl font-semibold text-${
         mode === "light" ? "white" : "gray-700"
       } `}>{children}</h1>
     </>

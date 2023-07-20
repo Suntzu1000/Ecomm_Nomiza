@@ -6,6 +6,7 @@ interface RowProps {
   onClick?: () => void;
   flex?: string;
   flexwrap?: string;
+  gap?: string;
 }
 
 const Row: React.FC<RowProps> = ({
@@ -14,9 +15,10 @@ const Row: React.FC<RowProps> = ({
   onClick,
   flex = "flex",
   flexwrap = "flex-wrap",
+  gap,
 }) => {
   return (
-    <div className={`${flex} ${flexwrap} -mx-4 ${className}`} onClick={onClick}>
+    <div className={`${gap ? gap : flex} w-full -mx-4 ${className}`} onClick={onClick}>
       {children}
     </div>
   );
