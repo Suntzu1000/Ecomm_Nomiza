@@ -16,16 +16,23 @@ export const useGetPaypalClientIdQuery = () =>
       (await apiClient.get<{ clientId: string }>(`/api/keys/paypal`)).data,
   });
 
-  export const usePayOrderMutation = () =>
-   useMutation({
-     mutationFn: async (details: { orderId: string }) =>
-       (
-         await apiClient.put<{ message: string; order: Order }>(
-           `api/orders/${details.orderId}/pay`,
-           details
-         )
-       ).data,
-   })
+export const usePayOrderMutation = () =>
+  useMutation({
+    mutationFn: async (details: { orderId: string }) =>
+      (
+        await apiClient.put<{ message: string; order: Order }>(
+          `api/pedidos/${details.orderId}/pay`,
+          details
+        )
+      ).data,
+  });
+
+export const useGetOrderHistoryQuery = () =>
+  useQuery({
+    queryKey: ["historico-pedidos"],
+    queryFn: async () =>
+      (await apiClient.get<Order[]>(`/api/pedidos/meu`)).data,
+  });
 
 export const useCreateOrderMutation = () =>
   useMutation({

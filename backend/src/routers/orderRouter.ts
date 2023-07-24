@@ -1,9 +1,18 @@
 import express, { Request, Response } from "express";
 import { isAuth } from "../utils";
 import asyncHandler from "express-async-handler";
-import { OrderModel } from "../models/orderMode";
+import { OrderModel } from "../models/orderModel";
 import { Product } from "../models/productModel";
 export const orderRouter = express.Router();
+
+orderRouter.get(
+  '/meu',
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    const orders = await OrderModel.find({ user: req.user._id })
+    res.json(orders)
+  })
+)
 
 orderRouter.get(
   '/:id',

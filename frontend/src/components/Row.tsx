@@ -14,7 +14,6 @@ const Row: React.FC<RowProps> = ({
   children,
   onClick,
   flex = "flex",
-  flexwrap = "flex-wrap",
   gap,
 }) => {
   return (

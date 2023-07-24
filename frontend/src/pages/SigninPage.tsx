@@ -19,7 +19,7 @@ export default function SigninPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { state, dispatch } = useContext(Store);
-  const { User } = state;
+  const { user } = state;
   const { mutateAsync: signin, isLoading } = useSigninMutation();
 
   const submitHandler = async (e: React.SyntheticEvent) => {
@@ -38,10 +38,10 @@ export default function SigninPage() {
   };
 
   useEffect(() => {
-    if (User) {
+    if (user) {
       navigate(redirect);
     }
-  }, [navigate, redirect, User]);
+  }, [navigate, redirect, user]);
 
   return (
     <Container className="small-container bg-gray-800 rounded-md shadow-lg p-8 mx-auto">

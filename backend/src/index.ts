@@ -1,7 +1,8 @@
 import cors from "cors";
 import dotenv from "dotenv";
-import express from "express";
+import express, { Request, Response } from "express";
 import mongoose from "mongoose";
+import path from "path";
 import { productRouter } from "./routers/ProductRouter";
 import { seedRouter } from "./routers/seedRouter";
 import { userRouter } from "./routers/userRouter";
@@ -37,9 +38,15 @@ app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/pedidos", orderRouter);
 app.use("/api/seed", seedRouter);
-app.use('/api/keys', keyRouter)
+app.use("/api/keys", keyRouter);
 
-const PORT = 4000;
+app.use(express.static(path.join(__dirname, '../../frontend')))
+app.get('*', (req: Request, res: Response) =>
+  res.sendFile(path.join(__dirname, '../../frontend/index.html'))
+)
+
+ const PORT: number = parseInt((process.env.PORT || '4000') as string, 10)
+
 app.listen(PORT, () => {
   console.log(`Servidor Iniciado em: http://localhost:${PORT}`);
 });

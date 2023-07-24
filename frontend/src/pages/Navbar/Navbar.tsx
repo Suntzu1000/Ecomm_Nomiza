@@ -37,14 +37,13 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
   };
 
   const signoutHandler = () => {
-    dispatch({type: "USER_SIGNOUT"})
-    localStorage.removeItem('userInfo')
-    localStorage.removeItem('cartItems')
-    localStorage.removeItem('shippingAddress')
-    localStorage.removeItem('paymentMethod')
-    window.location.href = '/entrar'
-
-  }
+    dispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
+    window.location.href = "/entrar";
+  };
 
   return (
     <Disclosure
@@ -163,8 +162,8 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                             to="#signout"
-                             onClick={signoutHandler}
+                              to="#signout"
+                              onClick={signoutHandler}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
@@ -189,6 +188,10 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
                           )}
                         </Menu.Item>
                       )}
+
+                      <Menu.Item>
+                        <Link to="/historico">Histórico</Link>
+                      </Menu.Item>
 
                       <Menu.Item>
                         {({ active }) => (
