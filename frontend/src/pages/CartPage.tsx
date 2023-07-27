@@ -59,45 +59,53 @@ export default function CartPage() {
                 {cartItems.map((item: CartItem) => (
                   <ListGroup.Item key={item._id}>
                     <Row className="align-items-center">
-                      <Col md={4}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="img-fluid rounded img-thumbnail w-[10%] "
-                        />
-                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                     <Col className="md:flex md:space-x-4">
+  <Col md={4} className="flex items-center md:space-x-4">
+    <img
+      src={item.image}
+      alt={item.name}
+      className="md:w-1/2 rounded img-thumbnail"
+    />
+    <Link to={`/product/${item.slug}`} className="md:w-1/2">
+      {item.name}
+    </Link>
+  </Col>
 
-                        <Col md={3}>
-                          <Button
-                            onClick={() =>
-                              updateCartHandler(item, item.quantity - 1)
-                            }
-                            variant={mode as "dark" | "light"}
-                            disabled={item.quantity === 1}
-                          >
-                            <i className="fas fa-minus-circle"></i>
-                          </Button>{" "}
-                          <span>{item.quantity}</span>{" "}
-                          <Button
-                            variant={mode as "dark" | "light"}
-                            onClick={() =>
-                              updateCartHandler(item, item.quantity + 1)
-                            }
-                            disabled={item.quantity === item.countInStock}
-                          >
-                            <i className="fas fa-plus-circle"></i>
-                          </Button>
-                        </Col>
-                        <Col md={3}>R${item.price}</Col>
-                        <Col md={2}>
-                          <Button
-                            onClick={() => removeItemHandler(item)}
-                            variant={mode as "dark" | "light"}
-                          >
-                            <i className="fas fa-trash"></i>
-                          </Button>
-                        </Col>
-                      </Col>
+  <Col md={3} className="md:flex md:items-center md:justify-between">
+    <Button
+      onClick={() => updateCartHandler(item, item.quantity - 1)}
+      variant={mode as "dark" | "light"}
+      disabled={item.quantity === 1}
+      className="flex items-center"
+    >
+      <i className="fas fa-minus-circle"></i>
+    </Button>
+    <span>{item.quantity}</span>
+    <Button
+      variant={mode as "dark" | "light"}
+      onClick={() => updateCartHandler(item, item.quantity + 1)}
+      disabled={item.quantity === item.countInStock}
+      className="flex items-center"
+    >
+      <i className="fas fa-plus-circle"></i>
+    </Button>
+  </Col>
+
+  <Col md={3} className="md:flex md:items-center md:justify-center">
+    R${item.price}
+  </Col>
+
+  <Col md={2} className="md:flex md:items-center md:justify-end">
+    <Button
+      onClick={() => removeItemHandler(item)}
+      variant={mode as "dark" | "light"}
+      className="flex items-center"
+    >
+      <i className="fas fa-trash"></i>
+    </Button>
+  </Col>
+</Col>
+
                     </Row>
                   </ListGroup.Item>
                 ))}

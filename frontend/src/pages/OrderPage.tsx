@@ -103,7 +103,7 @@ export default function OrderPage() {
   ) : !order ? (
     <MessageBox variant="danger">Pedido não encontrado</MessageBox>
   ) : (
-    <div>
+    <div className="w-[100%] h-[100%]" >
       <Helmet>
         <title>Pedido {orderId}</title>
       </Helmet>
