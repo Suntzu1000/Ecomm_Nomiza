@@ -14,5 +14,8 @@
     "url": "git+https://github.com/Suntzu1000/Ecomm_Nomiza"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
 }

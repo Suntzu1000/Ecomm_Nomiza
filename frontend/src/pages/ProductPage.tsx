@@ -56,15 +56,15 @@ export default function ProductPage() {
     <MessageBox variant="danger">PRODUTO NÃO ENCONTRADO</MessageBox>
   ) : (
     <div>
-      <Row className={`grid grid-cols-3`}>
-        <Col md={6} className="flex-grow-1">
+      <Row >
+        <Col md={6} >
           <img
             className="w-[100%] h-auto mb-4"
             src={product?.image}
             alt={product.name}
           />
         </Col>
-        <Col md={3} className="flex-grow-1">
+        <Col md={3} >
           <ListGroup className="text-left" variant="flush">
             <ListGroup.Item className="font-bold text-2xl">
               <Helmet>
@@ -89,18 +89,18 @@ export default function ProductPage() {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={3}>
+        <Col md={3}  >
           <Card>
             <Card.Body>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <Row className="flex justify-between items-center space-x-4">
+                  <Row className="flex justify-between items-center ">
                     <h3 className="text-xl  font-bold">Preço:</h3>
                     <p className="font-semibold">R${product.price}</p>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Row className="flex justify-between items-center space-x-4">
+                  <Row className="flex justify-between items-center">
                     <h1 className="text-xl font-bold">Status:</h1>
                     <p>
                       {product.countInStock > 0 ? (

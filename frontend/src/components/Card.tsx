@@ -11,7 +11,7 @@ const Card: CardComponent = ({ children, className, padding = "p-6" }) => {
 
   return (
     <div
-      className={`${className} w-[100%] mr-[100%] rounded-xl shadow-2xl ${padding} bg-${
+      className={`${className} w-[100%]  rounded-xl shadow-2xl ${padding} bg-${
         mode === "light" ? "gray-800" : "white"
       }`}
     >
